@@ -1,4 +1,4 @@
-# Learning Cockpit Spec v0.2.0
+# Learning Cockpit Spec v0.3.0
 
 ## Purpose
 
@@ -11,24 +11,24 @@ Provide one cross-domain visual interface over versioned LearningOps state. The 
 - Core must never embed learner mastery/evidence as application source data.
 - A build or artifact-generation step may combine Core UI with a Workspace snapshot for rendering.
 
-## Experience
+## MVP experience
 
 The Cockpit is mobile-first, framework-light and usable from phone, notebook or web. Design is subordinate to learning utility.
 
-## Required views
+The v0.3 MVP must provide real navigation and interaction, not only a static preview.
 
-- Overall learner view across domains.
-- Domain dashboard.
+## Required MVP views
+
+- Overall learner overview across domains.
+- Domain list and per-domain dashboard.
+- Per-domain tabs for PDI, competencies, sessions, evidence and gaps.
 - Generalist breadth vs specialist depth.
-- Observed mastery with evidence drill-down.
-- First-try vs assisted accuracy when evidence exists.
-- Retention and transfer indicators when evidence exists.
-- PDI and priority gaps.
-- Knowledge graph and competency dependencies.
-- Session history and evidence lineage.
-- Knowledge debt and misconceptions.
-
-The v0.2 implementation may expose a smaller baseline surface while preserving the data contracts required to grow into these views.
+- Observed mastery with zero-state behavior.
+- Cross-domain PDI.
+- Knowledge graph surface.
+- Session/history timeline.
+- Evidence-lineage governance view.
+- Learning Whiteboard with draggable components usable on touch and desktop.
 
 ## Zero-state behavior
 
@@ -36,14 +36,47 @@ A newly initialized domain must visibly show 0% observed mastery and must not fa
 
 A domain baseline does not imply an active learning session.
 
-## Visual learning
+## Whiteboard
 
-The Cockpit should support architecture diagrams and collaborative visual reasoning without requiring a design tool. Preferred representations are lightweight web-native diagrams, editable nodes/edges, SVG or Mermaid where appropriate.
+The MVP whiteboard may persist draft nodes locally in the browser. Local whiteboard state is not learner evidence and must not affect mastery.
+
+A later governed capability may promote selected diagrams or notes to versioned Workspace artifacts.
+
+## Knowledge graph
+
+At zero baseline, render only registered domains and system relationships. Concepts and edges must be added from versioned knowledge or evidence; never fabricate a graph to make the interface appear populated.
+
+## Data contract
+
+The UI consumes a Workspace snapshot. At minimum each domain exposes:
+
+- domain id;
+- title;
+- status label;
+- observed mastery;
+- generalist breadth;
+- specialist depth;
+- evidence count;
+- validated competencies;
+- current session.
+
+Future snapshot fields must be backward compatible or accompanied by an explicit migration.
 
 ## Portability
 
-Knowledge content should remain portable through Markdown, YAML frontmatter and JSON/JSONL. Obsidian may consume these files but must not be a runtime dependency.
+Knowledge content remains portable through Markdown, YAML frontmatter and JSON/JSONL. Obsidian may consume these files but is not a runtime dependency.
 
 ## Metric guardrail
 
-Never display a mastery percentage without a route to its evidence and lineage. If evidence is insufficient, display that explicitly rather than inventing a score.
+Never display an evidence-derived mastery value without lineage in the persisted model. If evidence is insufficient, display that explicitly rather than inventing a score.
+
+## MVP acceptance criteria
+
+The v0.3 MVP is acceptable when a user can, on phone or desktop:
+
+1. navigate between overview and system views;
+2. open each domain and inspect its learning surfaces;
+3. confirm zero baseline without fabricated knowledge;
+4. inspect PDI, history and lineage placeholders driven by real state;
+5. create and drag whiteboard components locally;
+6. return to other views without page reload.
