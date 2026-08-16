@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <title>LearningOps Cockpit</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111827;background:#f6f7f9}*{box-sizing:border-box}body{margin:0}.shell{max-width:1120px;margin:auto;padding:20px}.top{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#6b7280}.title{font-size:30px;margin:4px 0 0}.muted{color:#6b7280}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 1px 2px rgba(0,0,0,.03)}.domain{cursor:pointer;transition:.15s transform}.domain:hover{transform:translateY(-1px)}.domain-head{display:flex;justify-content:space-between;gap:12px}.domain h2{font-size:18px;margin:0}.score{font-size:34px;font-weight:750;margin:22px 0 4px}.bar{height:8px;background:#eef0f3;border-radius:999px;overflow:hidden}.bar>span{display:block;height:100%;background:#111827}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.metric{padding:10px;background:#f8fafc;border-radius:12px}.metric b{display:block;font-size:15px}.metric span{font-size:11px;color:#6b7280}.status{display:inline-flex;padding:5px 9px;border-radius:999px;background:#f3f4f6;font-size:12px}.empty{margin-top:16px;padding:14px;border:1px dashed #d1d5db;border-radius:12px;color:#6b7280;font-size:13px}.wide{grid-column:1/-1}.section-title{font-size:14px;margin:0 0 12px}.graph{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#fff,#fafafa)}.node-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.node{border:1px solid #d1d5db;border-radius:999px;padding:8px 12px;background:#fff;font-size:12px}.footer{font-size:12px;color:#6b7280;margin-top:18px}.error{padding:16px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}@media(max-width:720px){.shell{padding:14px}.top{align-items:start;flex-direction:column}.title{font-size:25px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.metrics{grid-template-columns:repeat(3,1fr)}.score{font-size:30px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top"><div><div class="eyebrow">Human–AI Learning System</div><h1 class="title">LearningOps Cockpit</h1><div class="muted">Mastery observado, evidência e evolução por domínio.</div></div><div id="core" class="status">Core</div></header>
+    <section id="domains" class="grid"></section>
+    <section class="grid" style="margin-top:16px"><article class="card wide"><h3 class="section-title">Knowledge Graph</h3><div class="graph"><div><div class="node-row" id="nodes"></div><p class="muted">O grafo será enriquecido apenas por conhecimento versionado.</p></div></div></article></section>
+    <div id="error"></div><footer class="footer">GitHub é o source of truth. Percentuais só evoluem com evidence lineage.</footer>
+  </main>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function domainCard(d){const mastery=Number(d.observed_mastery||0);return `<article class="card domain" data-domain="${esc(d.domain)}"><div class="domain-head"><div><h2>${esc(d.title)}</h2><div class="muted">${esc(d.status_label||'Não iniciado')}</div></div><span class="status">${esc(d.current_session||'Sem sessão')}</span></div><div class="score">${mastery}%</div><div class="muted">mastery observado</div><div class="bar"><span style="width:${Math.max(0,Math.min(100,mastery))}%"></span></div><div class="metrics"><div class="metric"><b>${Number(d.generalist_breadth||0)}%</b><span>Generalista</span></div><div class="metric"><b>${Number(d.specialist_depth||0)}%</b><span>Especialista</span></div><div class="metric"><b>${Number(d.evidence_count||0)}</b><span>Evidências</span></div></div>${Number(d.evidence_count||0)===0?'<div class="empty">Ainda não há evidência de aprendizagem. O baseline permanece em 0%.</div>':''}</article>`}
+function render(state){document.getElementById('core').textContent=`Core v${esc(state.core_version||'—')}`;document.getElementById('domains').innerHTML=(state.domains||[]).map(domainCard).join('');document.getElementById('nodes').innerHTML=(state.domains||[]).map(d=>`<span class="node">${esc(d.title)}</span>`).join('')||'<span class="muted">Sem domínios</span>'}
+async function boot(){try{const injected=window.LEARNINGOPS_SNAPSHOT;if(injected)return render(injected);const r=await fetch('./snapshot.json',{cache:'no-store'});if(!r.ok)throw new Error('snapshot.json não encontrado');render(await r.json())}catch(e){document.getElementById('error').innerHTML=`<div class="error">Cockpit sem snapshot de Workspace. Gere/copiem o snapshot conforme o contrato de build. (${esc(e.message)})</div>`}}
+boot();
+</script>
+</body></html>
