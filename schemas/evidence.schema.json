@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/evidence.schema.json",
+  "title": "LearningOps Evidence Event",
+  "type": "object",
+  "required": [
+    "id",
+    "timestamp",
+    "domain",
+    "session_id",
+    "competency_id",
+    "activity_type",
+    "assistance_level",
+    "result",
+    "source",
+    "core_version"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "domain": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "competency_id": {"type": "string", "minLength": 1},
+    "activity_type": {"type": "string", "minLength": 1},
+    "prompt_or_task_ref": {"type": ["string", "null"]},
+    "learner_response_summary": {"type": ["string", "null"]},
+    "assistance_level": {
+      "enum": ["none", "clarification_only", "hint_1", "hint_2_plus", "solution_exposed"]
+    },
+    "result": {"enum": ["correct", "partially_correct", "incorrect", "not_scored"]},
+    "evaluator_rationale": {"type": ["string", "null"]},
+    "source": {"type": "string", "minLength": 1},
+    "core_version": {"type": "string", "minLength": 1},
+    "metric_effects": {"type": "object", "additionalProperties": {"type": "number"}}
+  },
+  "additionalProperties": true
+}
