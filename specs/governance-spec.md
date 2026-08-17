@@ -1,48 +1,79 @@
-# Governance Spec v0.1.0
+# Governance Spec v0.2.0
 
-## Planes
+## Control Plane
 
-### Control Plane: LearningOps
+LearningOps has one control plane responsible for system architecture and governance.
 
-The `LearningOps` ChatGPT project is the only plane authorized to approve structural changes to the LearningOps system.
+In the ChatGPT adapter, the recommended UX is one Project named `LearningOps` with a dedicated maintenance chat named `Sistema LearningOps`.
 
-It governs:
+That chat is the operational surface for:
 
-- Core architecture;
-- global specs and schemas;
-- evidence model;
-- KPIs and PDI rules;
-- knowledge-graph conventions;
-- shared workspace structure;
-- Learning Cockpit;
-- migrations and compatibility.
+- installation and access validation;
+- architecture and system maintenance;
+- spec and schema changes;
+- migrations and compatibility;
+- branches, commits, pull requests and merges;
+- Cockpit changes;
+- cross-domain governance.
 
-### Study Planes
+The chat title is a process convention, not an access-control boundary. GitHub permissions and review history remain authoritative.
 
-Study projects such as `LearningOps | Modern Data Architecture` and `LearningOps | Human–AI Cognitive Engineering` may:
+## Study Plane
+
+A Study Plane is a logical learning context, not necessarily a separate ChatGPT Project.
+
+In the ChatGPT adapter, every other learning chat inside the `LearningOps` Project may act as a Study Plane for its named field, for example:
+
+- `Arquitetura Moderna de Dados`;
+- `Engenharia de Prompt`;
+- `Sistemas Distribuídos`.
+
+The learner should not need to understand the term `Study Plane` to use the system.
+
+Study chats may:
 
 - study;
 - read Core;
-- read/write their domain learning evidence when authorized by the operating environment;
-- produce knowledge and session artifacts;
+- read the relevant Workspace domain;
+- create domain-scoped learning/session records when authorized;
+- produce knowledge and evidence;
 - identify gaps and misconceptions;
 - propose structural improvements.
 
-They must not autonomously approve or merge changes to global Core contracts, shared schemas, shared Cockpit structures or cross-domain governance.
+They must not autonomously approve or merge changes to global Core contracts, schemas, Cockpit structures or cross-domain governance.
+
+## Single Responsibility
+
+Single Responsibility is a governance invariant.
+
+- Core stores reusable system intelligence.
+- Workspace stores observed learner state.
+- each spec has one primary reason to change;
+- each schema validates one record family or bounded aggregate;
+- the ChatGPT project instruction orchestrates rather than duplicating all specs;
+- the Cockpit renders state but does not manufacture learning evidence.
+
+See [genai-architecture-spec.md](genai-architecture-spec.md).
 
 ## Change flow
 
-Problem -> Evidence -> Proposal -> Impact -> Spec -> Implementation -> Validation -> PR -> Merge
+`Problem -> Evidence -> Proposal -> Impact -> Spec -> Implementation -> Validation -> PR -> Merge`
+
+Relevant changes must not be made silently.
 
 ## Approval model
 
-- Study planes propose.
-- LearningOps evaluates and approves conceptually.
+- Study contexts may propose.
+- the LearningOps Control Plane evaluates and approves conceptually;
 - GitHub records what was actually implemented and merged.
 
 ## Repository boundary
 
-- `LearningOps-core` contains the system.
-- `LearningOps-workspace` contains observed human state.
+- `euvictorhfs/LearningOps` contains the public Core: methods, rules, specs, schemas, runtime adapters and Cockpit implementation.
+- `euvictorhfs/LearningOps-workspace` contains private learner state: domains, sessions, evidence, metrics, PDI, gaps, history and learner graph references.
 
 Crossing this boundary requires an explicit architectural decision.
+
+## Source of truth
+
+GitHub `main` is the persisted source of truth. Conversation memory supports runtime continuity but never replaces persisted state or evidence.
