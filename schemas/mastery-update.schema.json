@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/mastery-update.schema.json",
+  "title": "LearningOps Mastery Update",
+  "type": "object",
+  "required": ["id", "timestamp", "domain", "competency_id", "prior_state", "new_state", "evidence_ids", "rationale", "core_version"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "domain": {"type": "string", "minLength": 1},
+    "competency_id": {"type": "string", "minLength": 1},
+    "prior_state": {"enum": ["unobserved", "exposed", "developing", "applied", "robust", "specialist", "review_due"]},
+    "new_state": {"enum": ["unobserved", "exposed", "developing", "applied", "robust", "specialist", "review_due"]},
+    "prior_value": {"type": ["number", "null"]},
+    "new_value": {"type": ["number", "null"]},
+    "competency_model_version": {"type": ["string", "null"]},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "counterevidence_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "rationale": {"type": "string", "minLength": 1},
+    "core_version": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}
