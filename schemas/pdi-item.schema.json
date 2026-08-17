@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/pdi-item.schema.json",
+  "title": "LearningOps PDI Item",
+  "type": "object",
+  "required": ["id", "target_competency_ids", "gap_statement", "priority", "next_intervention", "expected_evidence", "status", "created_at", "updated_at"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "target_competency_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "gap_statement": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}, "default": []},
+    "priority": {"enum": ["low", "medium", "high", "critical"]},
+    "priority_rationale": {"type": "string"},
+    "next_intervention": {"type": "string", "minLength": 1},
+    "expected_evidence": {"type": "string", "minLength": 1},
+    "status": {"enum": ["active", "blocked", "review_due", "addressed", "superseded"]},
+    "review_trigger": {"type": ["string", "null"]},
+    "review_date": {"type": ["string", "null"], "format": "date"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": true
+}
