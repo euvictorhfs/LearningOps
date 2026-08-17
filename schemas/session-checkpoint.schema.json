@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/session-checkpoint.schema.json",
+  "title": "LearningOps Session Checkpoint",
+  "type": "object",
+  "required": ["id", "timestamp", "domain", "chat_label", "core_version", "encountered", "demonstrated", "gaps", "next_action"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "domain": {"type": "string", "minLength": 1},
+    "chat_label": {"type": "string", "minLength": 1},
+    "core_version": {"type": "string", "minLength": 1},
+    "encountered": {"type": "array", "items": {"type": "string"}, "default": []},
+    "demonstrated": {"type": "array", "items": {"type": "string"}, "default": []},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "gaps": {"type": "array", "items": {"type": "string"}, "default": []},
+    "misconceptions": {"type": "array", "items": {"type": "string"}, "default": []},
+    "assistance_summary": {"type": ["string", "null"]},
+    "pdi_item_ids_changed": {"type": "array", "items": {"type": "string"}, "default": []},
+    "next_action": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

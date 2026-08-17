@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/planner.schema.json",
+  "title": "LearningOps Learning Planner",
+  "type": "object",
+  "required": ["id", "version", "domain_id", "goal", "scope", "out_of_scope", "target_competency_ids", "status", "core_version", "created_at"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "domain_id": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string"},
+    "goal": {"type": "string", "minLength": 1},
+    "desired_outcomes": {"type": "array", "items": {"type": "string"}, "default": []},
+    "scope": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "out_of_scope": {"type": "array", "items": {"type": "string"}, "default": []},
+    "target_competency_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "prerequisite_refs": {"type": "array", "items": {"type": "string"}, "default": []},
+    "curriculum_node_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "target_depth": {"type": ["string", "object"]},
+    "evidence_expectations": {"type": "array", "items": {"type": "string"}, "default": []},
+    "checkpoint_rules": {"type": "array", "items": {"type": "string"}, "default": []},
+    "pdi_linkage": {"type": "array", "items": {"type": "string"}, "default": []},
+    "status": {"enum": ["draft", "closed", "approved", "active", "superseded"]},
+    "core_version": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "approved_at": {"type": ["string", "null"], "format": "date-time"},
+    "supersedes": {"type": ["string", "null"]},
+    "approval_note": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

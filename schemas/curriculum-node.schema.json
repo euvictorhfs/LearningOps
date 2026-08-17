@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/curriculum-node.schema.json",
+  "title": "LearningOps Curriculum Node",
+  "type": "object",
+  "required": ["id", "title", "target_competency_ids", "level", "rationale", "target_depth", "status"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "target_competency_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "prerequisite_node_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "level": {"enum": ["foundation", "core", "intermediate", "advanced", "specialist"]},
+    "rationale": {"type": "string", "minLength": 1},
+    "target_depth": {"type": "string", "minLength": 1},
+    "recommended_methods": {"type": "array", "items": {"type": "string"}, "default": []},
+    "acceptable_evidence": {"type": "array", "items": {"type": "string"}, "default": []},
+    "status": {"enum": ["not_started", "active", "covered", "review_due", "superseded"]},
+    "next_candidate_node_ids": {"type": "array", "items": {"type": "string"}, "default": []},
+    "curriculum_version": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
