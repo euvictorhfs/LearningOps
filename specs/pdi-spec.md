@@ -1,36 +1,52 @@
-# PDI Spec v1.1
+# PDI Spec v1.2
 
 ## Purpose
 
-Define the LearningOps Individual Development Plan as a living, evidence-driven development loop tied to a learning goal.
+Define the LearningOps Individual Development Plan as a living, evidence-driven, cross-domain prioritization loop.
 
-PDI is not a static wish list and not a performance rating. It translates desired capability into prioritized development actions and is continuously revised from evidence.
+PDI is not a static wish list, not a performance rating and not one isolated plan per study chat. Domain-local development items may exist, but the canonical learner prioritization is global across active goals and domains.
+
+The preferred conversational interface for global PDI is `My Learning`.
 
 ## Method
 
-LearningOps uses the loop:
+LearningOps uses:
 
 `GOAL -> TARGET COMPETENCIES -> CURRENT EVIDENCE -> GAP -> PRIORITY -> INTERVENTION -> EVIDENCE -> REVIEW -> ADAPT`
 
-This combines goal alignment, competency-based development and continuous feedback.
+## Scope model
+
+### Domain-local PDI context
+
+A study domain may maintain gaps and candidate interventions tied to its Planner and evidence.
+
+### Global PDI
+
+Global PDI ranks active development needs across domains and professional goals.
+
+It answers:
+
+`Given all current goals, Planners, evidence and dependencies, what should this learner work on next?`
+
+Do not assume every domain receives equal priority.
 
 ## Required fields
 
 ### Goal
 
-The capability outcome the learner wants to reach, with scope and relevant constraints.
+Capability outcome, scope and constraints. A global PDI may reference multiple goals.
 
 ### Target competencies
 
-Competencies required to achieve the goal, including target breadth/depth where applicable.
+Competencies required for the goals, including breadth/depth where applicable.
 
 ### Current observed state
 
-Evidence-backed state only. Unknown remains unknown; it is not filled from title, credentials or self-confidence.
+Evidence-backed state only. Unknown remains unknown; never fill from title, credentials, self-confidence or chat memory.
 
 ### Gap
 
-Difference between target capability and observed evidence. Gaps may be:
+Difference between target capability and observed evidence. Gap types include:
 
 - prerequisite;
 - conceptual;
@@ -46,27 +62,23 @@ Difference between target capability and observed evidence. Gaps may be:
 
 ### Knowledge debt
 
-Knowledge debt is a known dependency the learner can currently work around but has not demonstrated at the depth required by the goal.
+A known dependency the learner can currently work around but has not demonstrated at the depth required by current goals.
 
-Examples:
-
-- can use Spark conceptually but cannot explain shuffle behavior;
-- can select a Lakehouse but lacks the metadata/table-format mechanisms needed to defend the choice;
-- can complete a task with a framework but cannot diagnose failure below the abstraction.
-
-Knowledge debt does not automatically block progression. Its priority depends on prerequisite leverage, recurrence, risk and the learner goal.
+Knowledge debt does not automatically block progression. Priority depends on leverage, recurrence, risk and goals.
 
 ### Priority
 
-Rank gaps using:
+Rank using:
 
 `goal impact x prerequisite leverage x evidence weakness x recurrence x risk`
+
+For global prioritization, also consider cross-domain leverage: a prerequisite that unlocks several active domains may outrank a narrow local weakness.
 
 Do not prioritize by novelty alone.
 
 ### Intervention
 
-Choose the smallest useful action likely to generate learning and evidence, such as:
+Choose the smallest useful action likely to produce learning and evidence, such as:
 
 - microlearning;
 - retrieval practice;
@@ -81,7 +93,7 @@ Choose the smallest useful action likely to generate learning and evidence, such
 
 ### Success evidence
 
-Define before the intervention what observable behavior would indicate progress.
+Define observable success before the intervention where practical.
 
 ### Review
 
@@ -91,37 +103,43 @@ After evidence, decide whether to:
 - deepen;
 - revisit a prerequisite;
 - schedule retention review;
-- change priority;
+- change global/domain priority;
 - mark the gap sufficiently addressed for the current goal.
 
 ## PDI item
 
-Each active PDI item should include:
+Each item should include:
 
 - `id`;
+- domain id(s) when applicable;
+- goal references;
 - target competency ids;
 - gap type and statement;
 - evidence references;
 - priority and rationale;
+- cross-domain leverage where relevant;
 - next intervention;
 - expected evidence;
 - status;
 - created/updated timestamps;
-- review trigger or date.
+- review trigger/date.
 
 ## Guardrails
 
-- A PDI does not create mastery.
+- PDI does not create mastery.
 - Completing an activity does not close a gap without evidence.
-- PDI priorities can change when contradictory evidence appears.
-- Keep the active PDI small; prefer a few high-leverage priorities over a long backlog.
-- Separate development needs from judgments of identity, seniority or human worth.
-- Do not turn every weakness into an active PDI item; only persist development work relevant to the current objective or systemic prerequisite risk.
+- Contradictory evidence may change priority.
+- Keep the active global PDI small; prefer a few high-leverage priorities over a long backlog.
+- Separate development needs from identity, seniority or human-worth judgments.
+- Do not turn every weakness into an active item.
+- Do not require a dedicated PDI chat: `My Learning` is the cross-domain surface; study chats consume relevant domain priorities.
 
-## Relationship to curriculum
+## Relationships
 
-Curriculum answers `what capabilities and sequence form the domain?`.
+Curriculum: `what capabilities and sequence form the domain?`
 
-PDI answers `given this learner's goal and evidence, what should we work on next?`.
+Planner: `what has this learner agreed to study in this domain?`
 
-The PDI may temporarily reorder curriculum nodes when a gap has higher leverage.
+PDI: `across goals and evidence, what should the learner work on now?`
+
+The PDI may temporarily reorder curriculum activity when a higher-leverage gap exists, but it must not silently rewrite an approved Planner.
