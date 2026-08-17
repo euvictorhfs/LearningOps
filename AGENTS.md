@@ -4,41 +4,61 @@ LearningOps is the canonical system of record for deliberate learning and longit
 
 ## Authority
 
-Only the LearningOps control-plane project may approve structural changes to this repository, global schemas, assessment rules, evidence rules, PDI rules, knowledge-graph conventions, shared Workspace structure or the Learning Cockpit.
+Only the LearningOps control plane may approve structural changes to Core architecture, global specs/schemas, assessment and evidence rules, mastery computation, PDI, curriculum generation, knowledge-graph conventions, shared Workspace structure, runtime adapters or the Learning Cockpit.
 
-Study planes may read the Core, run sessions and propose domain-scoped records. ThoughtOps may submit work-evidence candidates. Neither may mutate global structures autonomously.
+Study contexts may learn, create domain-scoped records when authorized and propose improvements. They must not silently mutate global structures.
 
-## Separation
+## Single Responsibility
 
-- `LearningOps`: reusable learning rules, schemas, engine and cockpit.
-- `LearningOps-workspace`: learner state, sessions, evidence, metrics, PDI, gaps, history and knowledge graph.
-- `ThoughtOps`: daily professional artifacts and situational feedback.
-- `ThoughtOps-workspace`: work context, preferences and approved operational records.
+Single Responsibility is a system invariant.
 
-LearningOps exclusively owns study, curriculum, observed mastery, validated repertoire, longitudinal technical positioning and evidence-based résumé generation. It must not become an email, Jira or sprint-document production system.
+- `LearningOps` Core = reusable system methods, contracts, schemas, runtime and Cockpit.
+- `LearningOps-workspace` = observed learner state and lineage.
+- each specialized spec has one primary reason to change;
+- the ChatGPT Project prompt orchestrates specs instead of duplicating them;
+- UI renders state but does not manufacture evidence.
 
-## External work evidence
+Use `specs/genai-architecture-spec.md` for Generative-AI architecture principles.
 
-ThoughtOps candidates enter through `specs/thoughtops-evidence-contract.md`. A candidate is never proof by declaration. LearningOps records an intake decision: accepted, rejected, needs demonstration or superseded. Acceptance may contribute evidence without necessarily changing a metric.
+## Specialized responsibilities
+
+- `learning-method-spec.md` — teaching methods and adaptive learning cycle.
+- `competency-model-spec.md` — observable competence.
+- `curriculum-spec.md` — learning-path generation and sequencing.
+- `pdi-spec.md` — learner-specific development priorities.
+- `evidence-spec.md` — evidence and lineage.
+- `mastery-spec.md` — evidence-to-observed-mastery inference.
+- `knowledge-graph-spec.md` — typed domain relationships and learner-graph separation.
+- `session-runtime-spec.md` — ChatGPT study runtime.
+- `evidence-based-resume-spec.md` — professional claims backed by validated evidence.
+- `cockpit-spec.md` — evidence-transparent visualization.
 
 ## Zero baseline
 
-Every new domain starts at 0% observed mastery. Prior experience, title, credentials, self-assessment, conversational memory and ThoughtOps observations do not initialize mastery. They may identify what to test.
+Every new domain starts at `0% observed mastery`. Prior experience, title, credentials, self-assessment and conversational memory may identify what to test but never initialize mastery.
 
 ## Evidence lineage
 
-No metric without evidence. No evidence without origin and time. No mastery change without lineage. Preserve assistance level, counterevidence, confidence, privacy classification and correction history.
+No metric without evidence. No evidence without origin and time. No mastery change without lineage. Preserve assistance, confidence, counterevidence, privacy classification, corrections and relevant model/spec versions.
 
-## Runtime
+## ChatGPT runtime
 
-On a fresh Study Plane with broad learning intent, infer the domain, load current Core and Workspace state, inspect history, start foundations when no session exists, or continue the next justified session. The learner need not remember bootstrap prompts.
+Recommended adapter:
 
-## Cockpit
+- Project: `LearningOps`;
+- maintenance/governance chat: `Sistema LearningOps`;
+- every other learning chat: named naturally after the field being studied.
 
-There is one mobile-first, evidence-transparent Learning Cockpit across domains. Implementation belongs in Core; learner data remains in Workspace.
+A learner should not need bootstrap prompts. Verify GitHub access, load only relevant authoritative context and start the adaptive learning method.
 
 ## Governance
 
 Structural changes follow:
 
-Problem -> Evidence -> Proposal -> Impact -> Spec -> Implementation -> Validation -> PR -> Merge
+`Problem -> Evidence -> Proposal -> Impact -> Spec -> Implementation -> Validation -> PR -> Merge`
+
+Relevant prompt/spec changes should include regression evaluation where feasible.
+
+## Source of truth
+
+GitHub `main` is the persisted source of truth. Do not claim reads, writes, synchronization or deployment that did not occur.
