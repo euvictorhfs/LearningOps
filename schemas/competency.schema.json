@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/competency.schema.json",
+  "title": "LearningOps Competency",
+  "type": "object",
+  "required": ["id", "title", "statement", "level", "dimensions"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "statement": {"type": "string", "minLength": 1},
+    "level": {"enum": ["foundation", "core", "intermediate", "advanced", "specialist"]},
+    "dimensions": {
+      "type": "array",
+      "items": {"enum": ["breadth", "conceptual_understanding", "application", "transfer", "design", "tradeoff_reasoning", "diagnosis", "depth", "retrieval", "retention", "technical_communication"]},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "prerequisites": {"type": "array", "items": {"type": "string"}, "default": []},
+    "target_depth": {"type": ["string", "null"]},
+    "acceptable_evidence": {"type": "array", "items": {"type": "string"}, "default": []},
+    "disconfirming_evidence": {"type": "array", "items": {"type": "string"}, "default": []},
+    "retention_expectation": {"type": ["string", "null"]},
+    "model_version": {"type": "string"}
+  },
+  "additionalProperties": true
+}
