@@ -1,4 +1,4 @@
-# PDI Spec v1.0
+# PDI Spec v1.1
 
 ## Purpose
 
@@ -41,7 +41,20 @@ Difference between target capability and observed evidence. Gaps may be:
 - diagnostic;
 - depth;
 - retention;
-- communication.
+- communication;
+- knowledge debt.
+
+### Knowledge debt
+
+Knowledge debt is a known dependency the learner can currently work around but has not demonstrated at the depth required by the goal.
+
+Examples:
+
+- can use Spark conceptually but cannot explain shuffle behavior;
+- can select a Lakehouse but lacks the metadata/table-format mechanisms needed to defend the choice;
+- can complete a task with a framework but cannot diagnose failure below the abstraction.
+
+Knowledge debt does not automatically block progression. Its priority depends on prerequisite leverage, recurrence, risk and the learner goal.
 
 ### Priority
 
@@ -87,7 +100,7 @@ Each active PDI item should include:
 
 - `id`;
 - target competency ids;
-- gap statement;
+- gap type and statement;
 - evidence references;
 - priority and rationale;
 - next intervention;
@@ -103,6 +116,7 @@ Each active PDI item should include:
 - PDI priorities can change when contradictory evidence appears.
 - Keep the active PDI small; prefer a few high-leverage priorities over a long backlog.
 - Separate development needs from judgments of identity, seniority or human worth.
+- Do not turn every weakness into an active PDI item; only persist development work relevant to the current objective or systemic prerequisite risk.
 
 ## Relationship to curriculum
 
