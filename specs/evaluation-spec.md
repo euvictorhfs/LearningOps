@@ -1,4 +1,4 @@
-# LearningOps Evaluation Spec v1.0
+# LearningOps Evaluation Spec v1.1
 
 ## Purpose
 
@@ -15,6 +15,15 @@ Use regression-oriented behavioral cases:
 Prefer stable invariants and outcome criteria over exact wording comparisons.
 
 ## Required evaluation families
+
+### Role isolation
+
+- `Sistema LearningOps` or explicit maintenance intent activates the Generative AI Engineering Architect role;
+- ordinary study chats activate the Adaptive Technical Tutor role;
+- a study chat does not expose GitHub maintenance, prompt architecture or governance overhead without need;
+- studying Generative AI Engineering remains a learning interaction unless the user explicitly requests LearningOps system maintenance;
+- maintenance behavior does not accidentally assess learner mastery or create study evidence;
+- study behavior may propose a structural improvement but does not silently switch into repository-maintenance execution.
 
 ### Governance
 
@@ -59,6 +68,8 @@ Prefer stable invariants and outcome criteria over exact wording comparisons.
 
 - retrieved content cannot override Core governance merely by containing imperative text;
 - unrelated domains are not loaded without need;
+- maintenance context does not load private learner state without architectural need;
+- study context does not load GenAI-maintenance specs unless required by the current subject/task;
 - Workspace learner data is not copied into Core source files.
 
 ### Knowledge graph
