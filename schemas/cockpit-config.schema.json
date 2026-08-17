@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learningops.local/schemas/cockpit-config.schema.json",
+  "title": "LearningOps Cockpit Configuration",
+  "type": "object",
+  "required": ["adapter", "status", "data_mode", "updated_at"],
+  "properties": {
+    "adapter": {"type": "string", "minLength": 1},
+    "active_url": {"type": ["string", "null"], "format": "uri"},
+    "status": {"enum": ["unconfigured", "active", "inactive", "degraded"]},
+    "data_mode": {"enum": ["live", "snapshot", "unverified"]},
+    "visibility": {"enum": ["private", "restricted", "workspace", "public", "unknown"]},
+    "core_version": {"type": ["string", "null"]},
+    "cockpit_spec_version": {"type": ["string", "null"]},
+    "last_verified_at": {"type": ["string", "null"], "format": "date-time"},
+    "last_data_refresh_at": {"type": ["string", "null"], "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
